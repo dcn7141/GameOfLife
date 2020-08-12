@@ -15,8 +15,8 @@ namespace GameOfLife
         //Most variables will go below here that are used throughout the program
 
         // The universe array
-        bool[,] universe = new bool[15,15];
-        bool[,] scratchPad = new bool[15,15];
+        bool[,] universe = new bool[8,8];
+        bool[,] scratchPad = new bool[8,8];
 
         bool isToroidal = true;
 
