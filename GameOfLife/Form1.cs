@@ -298,7 +298,7 @@ namespace GameOfLife
             }
         }
 
-        #region
+        #region Color Dialog boxes
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
@@ -311,7 +311,46 @@ namespace GameOfLife
             }
             graphicsPanel1.Invalidate();
         }
+
+        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = cellColor;
+
+            if(DialogResult.OK == dlg.ShowDialog())
+            {
+                cellColor = dlg.Color;
+            }
+            graphicsPanel1.Invalidate();
+
+        }
+        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = gridColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor = dlg.Color;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
         #endregion
 
+        private void gridX10ColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = gridColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor x 10 = dlg.Color;
+            }
+            graphicsPanel1.Invalidate();
+        }
     }
 }
