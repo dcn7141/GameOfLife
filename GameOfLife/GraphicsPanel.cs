@@ -10,6 +10,7 @@ namespace GameOfLife
 {
     class GraphicsPanel : Panel
     {
+
         // Default constructor
         public GraphicsPanel()
         {

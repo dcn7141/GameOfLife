@@ -15,8 +15,8 @@ namespace GameOfLife
         //Most variables will go below here that are used throughout the program
 
         // The universe array
-        bool[,] universe = new bool[8,8];
-        bool[,] scratchPad = new bool[8,8];
+        bool[,] universe = new bool[20, 20];
+        bool[,] scratchPad = new bool[20, 20];
 
         bool isToroidal = true;
 
@@ -48,17 +48,17 @@ namespace GameOfLife
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    int count = CountNeighborsFinite(x, y);
+                    int count;
 
                     if (isToroidal == false)
                     {
-                        CountNeighborsFinite(x, y);
+                        count = CountNeighborsFinite(x, y);
                     }
                     else if (true)
                     {
-                        CountNeighborsToroidal(x,y);
+                        count = CountNeighborsToroidal(x, y);
                     }
-                
+
 
                     //Apply rules
                     if (universe[x, y]) //Read the universe
@@ -134,12 +134,11 @@ namespace GameOfLife
                     if (xOffset == 0 && yOffset == 0) continue;
                     if (xCheck < 0) xCheck += xLen - 1;
                     if (yCheck < 0) yCheck += yLen - 1;
-                    if (xCheck >= xLen) xCheck -= 0;
-                    if (yCheck >= yLen) yCheck -= 0;
+                    if (xCheck >= xLen) xCheck = 0;
+                    if (yCheck >= yLen) yCheck = 0;
                     if (universe[xCheck, yCheck] == true) count++;
                 }
             }
-            //graphicsPanel1.Invalidate();
 
             return count;
         }
@@ -276,19 +275,19 @@ namespace GameOfLife
             //the game.
         }
 
-        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+        private void finiteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    CountNeighborsFinite(x,y);
+                     CountNeighborsFinite(x, y);
                 }
             }
         }
 
-        private void torToolStripMenuItem_Click(object sender, EventArgs e)
+        private void torToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -298,5 +297,21 @@ namespace GameOfLife
                 }
             }
         }
+
+        #region
+        private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = graphicsPanel1.BackColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.BackColor = dlg.Color;
+            }
+            graphicsPanel1.Invalidate();
+        }
+        #endregion
+
     }
 }
