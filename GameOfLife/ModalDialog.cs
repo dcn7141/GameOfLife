@@ -28,6 +28,27 @@ namespace GameOfLife
                 numericUpDown1.Value = value;
             }
         }
-
+        public int numericUpDown2_ValueChanged
+        {
+            get
+            {
+                return (int)numericUpDown1.Value;
+            }
+            set
+            {
+                numericUpDown1.Value = value;
+            }
+        }
+        public int numericUpDown3_ValueChanged
+        {
+            get
+            {
+                return (int)numericUpDown1.Value;
+            }
+            set
+            {
+                numericUpDown1.Value = value;
+            }
+        }
     }
 }
