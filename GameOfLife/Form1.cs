@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -262,40 +263,15 @@ namespace GameOfLife
 
         #endregion
 
-        private void fromSeedToolStripMenuItem_ClickRandomSeed(object sender, EventArgs e)
-        {
-            //Initial Random Universe – One requirement of the assignment will be to 
-            //generate a random universe of cells. Start this by iterating through the 
-            //universe array using two nested for loops.As we visit each cell generate 
-            //a random number between 0 and 2 inclusive.If the random number's 
-            //value is 0 then make that cell alive, otherwise make it dead. After 
-            //this is completed the initial universe should be composed of 
-            //roughly 1/3 living cells and 2/3 dead cells. Later on you can play around 
-            //with the actual percentage of living to dead cells and see how that affects
-            //the game.
-        }
-
 
         private void finiteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            for (int y = 0; y < universe.GetLength(1); y++)
-            {
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-                     CountNeighborsFinite(x, y);
-                }
-            }
+            isToroidal = false;
         }
 
         private void torToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            for (int y = 0; y < universe.GetLength(1); y++)
-            {
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-                    CountNeighborsToroidal(x, y);
-                }
-            }
+            isToroidal = true;
         }
 
         #region Settings: Color Dialog boxes
@@ -340,7 +316,7 @@ namespace GameOfLife
 
         #endregion
 
-        #region Settings: options, reset,reload
+        #region Settings: options
         private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ModalDialog dlg = new ModalDialog();
@@ -353,8 +329,41 @@ namespace GameOfLife
 
                 graphicsPanel1.Invalidate();
             }
+
+            //dlg.numericUpDown2_ValueChanged = ;
+
+            //if (DialogResult.OK == dlg.ShowDialog())
+            //{
+            //    graphicsPanel1.Width = dlg.numericUpDown1_ValueChanged;
+
+            //    graphicsPanel1.Invalidate();
+            //}
+            //dlg.numericUpDown2_ValueChanged = ;
+
+            //if (DialogResult.OK == dlg.ShowDialog())
+            //{
+            //     = dlg.numericUpDown1_ValueChanged;
+
+            //    graphicsPanel1.Invalidate();
+            //}
+
         }
         #endregion
 
+        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            
+            
+            //Initial Random Universe – One requirement of the assignment will be to 
+            //generate a random universe of cells. Start this by iterating through the 
+            //universe array using two nested for loops.As we visit each cell generate 
+            //a random number between 0 and 2 inclusive.If the random number's 
+            //value is 0 then make that cell alive, otherwise make it dead. After 
+            //this is completed the initial universe should be composed of 
+            //roughly 1/3 living cells and 2/3 dead cells. Later on you can play around 
+            //with the actual percentage of living to dead cells and see how that affects
+            //the game.
+        }
     }
 }

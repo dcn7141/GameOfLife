@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="SeedDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeedDialog.Designer.cs">
+      <DependentUpon>SeedDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModalDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeedDialog.resx">
+      <DependentUpon>SeedDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModalDialog.resx">
       <DependentUpon>ModalDialog.cs</DependentUpon>
