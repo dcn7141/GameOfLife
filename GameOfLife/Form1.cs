@@ -15,8 +15,8 @@ namespace GameOfLife
         //Most variables will go below here that are used throughout the program
 
         // The universe array
-        bool[,] universe = new bool[20, 20];
-        bool[,] scratchPad = new bool[20, 20];
+        bool[,] universe = new bool[20,20];
+        bool[,] scratchPad = new bool[20,20];
 
         bool isToroidal = true;
 
@@ -298,7 +298,7 @@ namespace GameOfLife
             }
         }
 
-        #region Color Dialog boxes
+        #region Settings: Color Dialog boxes
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
@@ -340,17 +340,21 @@ namespace GameOfLife
 
         #endregion
 
-        private void gridX10ColorToolStripMenuItem_Click(object sender, EventArgs e)
+        #region Settings: options, reset,reload
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ColorDialog dlg = new ColorDialog();
+            ModalDialog dlg = new ModalDialog();
 
-            dlg.Color = gridColor;
+            dlg.numericUpDown1_ValueChanged = timer.Interval;
 
-            if (DialogResult.OK == dlg.ShowDialog())
+           if (DialogResult.OK == dlg.ShowDialog())
             {
-                gridColor x 10 = dlg.Color;
+                timer.Interval = dlg.numericUpDown1_ValueChanged;
+
+                graphicsPanel1.Invalidate();
             }
-            graphicsPanel1.Invalidate();
         }
+        #endregion
+
     }
 }
