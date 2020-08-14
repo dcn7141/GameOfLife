@@ -139,6 +139,7 @@
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

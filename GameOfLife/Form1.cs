@@ -330,7 +330,7 @@ namespace GameOfLife
                 graphicsPanel1.Invalidate();
             }
 
-            //dlg.numericUpDown2_ValueChanged = ;
+            //dlg.numericUpDown2_ValueChanged = graphicsPanel1.Width;
 
             //if (DialogResult.OK == dlg.ShowDialog())
             //{
@@ -338,11 +338,11 @@ namespace GameOfLife
 
             //    graphicsPanel1.Invalidate();
             //}
-            //dlg.numericUpDown2_ValueChanged = ;
+            //dlg.numericUpDown2_ValueChanged = graphicsPanel1.Height;
 
             //if (DialogResult.OK == dlg.ShowDialog())
             //{
-            //     = dlg.numericUpDown1_ValueChanged;
+            //    graphicsPanel1.Height = dlg.numericUpDown1_ValueChanged;
 
             //    graphicsPanel1.Invalidate();
             //}
@@ -352,7 +352,12 @@ namespace GameOfLife
 
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            SeedDialog dlg = new SeedDialog();
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+
+            }
             
             
             //Initial Random Universe – One requirement of the assignment will be to 

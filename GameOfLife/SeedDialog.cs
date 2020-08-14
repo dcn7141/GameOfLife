@@ -16,5 +16,16 @@ namespace GameOfLife
         {
             InitializeComponent();
         }
+        public int numericUpDown1_ValueChanged
+        {
+            get
+            {
+                return (int)numericUpDown1.Value;
+            }
+            set
+            {
+                numericUpDown1.Value = value;
+            }
+        }
     }
 }

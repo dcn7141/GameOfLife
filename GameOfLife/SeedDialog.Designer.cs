@@ -93,6 +93,7 @@
             this.Controls.Add(this.buttonRandomize);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SeedDialog";
