@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -34,6 +35,9 @@ namespace GameOfLife
         public Form1()
         {
             InitializeComponent();
+
+            //read settings
+           graphicsPanel1.BackColor =  Properties.Settings.Default.BackColor;
 
             // Setup the timer
             timer.Interval = 100; // milliseconds
@@ -264,6 +268,7 @@ namespace GameOfLife
         #endregion
 
 
+        #region Finite and Toroidal tab selections
         private void finiteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             isToroidal = false;
@@ -273,6 +278,8 @@ namespace GameOfLife
         {
             isToroidal = true;
         }
+        #endregion
+
 
         #region Settings: Color Dialog boxes
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,19 +337,24 @@ namespace GameOfLife
                 graphicsPanel1.Invalidate();
             }
 
-            //dlg.numericUpDown2_ValueChanged = graphicsPanel1.Width;
+            // universe = new bool[5,5];
+            ////scratchPad = new bool[,];
+
+            //dlg.numericUpDown2_ValueChanged = universe.Length;
 
             //if (DialogResult.OK == dlg.ShowDialog())
             //{
-            //    graphicsPanel1.Width = dlg.numericUpDown1_ValueChanged;
+            //    isToroidal = true;
+            //    //= dlg.numericUpDown2_ValueChanged;
 
             //    graphicsPanel1.Invalidate();
             //}
-            //dlg.numericUpDown2_ValueChanged = graphicsPanel1.Height;
+
+            //dlg.numericUpDown3_ValueChanged = universe.Length;
 
             //if (DialogResult.OK == dlg.ShowDialog())
             //{
-            //    graphicsPanel1.Height = dlg.numericUpDown1_ValueChanged;
+            //    universe.SetValue = dlg.numericUpDown3_ValueChanged;
 
             //    graphicsPanel1.Invalidate();
             //}
@@ -350,16 +362,35 @@ namespace GameOfLife
         }
         #endregion
 
+        #region Reset/Reload
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackColor;
+        }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reload();
+
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackColor;
+        }
+        #endregion
+
+        #region Seeds
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SeedDialog dlg = new SeedDialog();
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                //Where do i get the seed. how to change?
 
+                graphicsPanel1.Invalidate();
             }
-            
-            
+
             //Initial Random Universe – One requirement of the assignment will be to 
             //generate a random universe of cells. Start this by iterating through the 
             //universe array using two nested for loops.As we visit each cell generate 
@@ -369,6 +400,148 @@ namespace GameOfLife
             //roughly 1/3 living cells and 2/3 dead cells. Later on you can play around 
             //with the actual percentage of living to dead cells and see how that affects
             //the game.
+        }
+
+        #endregion
+
+        #region View menu
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           ///////
+        }
+        #endregion
+
+        #region Open and Save
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamReader reader = new StreamReader(dlg.FileName);
+
+                // Create a couple variables to calculate the width and height
+                // of the data in the file.
+                int maxWidth = 0;
+                int maxHeight = 0;
+
+                // Iterate through the file once to get its size.
+                while (!reader.EndOfStream)
+                {
+                    // Read one row at a time.
+                    string row = reader.ReadLine();
+
+                    // If the row begins with '!' then it is a comment
+                    // and should be ignored.
+                    if (row.Contains == '!')
+                    {
+                        
+                    }
+
+                    // If the row is not a comment then it is a row of cells.
+                    // Increment the maxHeight variable for each row read.
+
+                    // Get the length of the current row string
+                    // and adjust the maxWidth variable if necessary.
+                }
+
+                // Resize the current universe and scratchPad
+                // to the width and height of the file calculated above.
+
+                // Reset the file pointer back to the beginning of the file.
+                reader.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                // Iterate through the file again, this time reading in the cells.
+                while (!reader.EndOfStream)
+                {
+                    // Read one row at a time.
+                    string row = reader.ReadLine();
+
+                    // If the row begins with '!' then
+                    // it is a comment and should be ignored.
+
+                    // If the row is not a comment then 
+                    // it is a row of cells and needs to be iterated through.
+                    for (int xPos = 0; xPos < row.Length; xPos++)
+                    {
+                        // If row[xPos] is a 'O' (capital O) then
+                        // set the corresponding cell in the universe to alive.
+
+                        // If row[xPos] is a '.' (period) then
+                        // set the corresponding cell in the universe to dead.
+                    }
+                }
+                // Close the file.
+                reader.Close();
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Creat a boolean that indicates the document has been modified.
+            //creat a string that stores the path to the current document.
+
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
+
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+
+                // Prefix all comment strings with an exclamation point.
+                // Use WriteLine to write the strings to the file. 
+                // It appends a CRLF for you.
+
+                writer.WriteLine("Save work.");
+
+                // Iterate through the universe one row at a time.
+                for (int y = 0; y < universe.Length; y++)
+                {
+                    // Create a string to represent the current row.
+                    String currentRow = string.Empty;
+
+                    // Iterate through the current row one cell at a time.
+                    for (int x = 0; x < universe.Length; x++)
+                    {
+                        // If the universe[x,y] is alive then append 'O' (capital O)
+                        // to the row string.
+                        if (universe[x, y] == true)
+                        {
+                            currentRow += 'O';
+                            Console.WriteLine(currentRow);
+                        }
+
+                        // Else if the universe[x,y] is dead then append '.' (period)
+                        // to the row string.
+                        else
+                        {
+                            currentRow += '.';
+                            Console.WriteLine(currentRow);
+                        }
+                    }
+
+                    // Once the current row has been read through and the 
+                    // string constructed then write it to the file using WriteLine.
+                    currentRow = Console.ReadLine();
+                    Console.WriteLine(currentRow);
+                }
+
+                // After all rows and columns have been written then close the file.
+                writer.Close();
+            }
+        }
+
+        #endregion
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.BackColor = graphicsPanel1.BackColor;
+
+            Properties.Settings.Default.Save();
         }
     }
 }
